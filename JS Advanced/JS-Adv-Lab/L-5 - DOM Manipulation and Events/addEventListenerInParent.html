@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Propagation</title>
+</head>
+<body>
+    <div>
+        <article>
+            <button>Click Me 1</button>
+            <button>Click Me 2</button>
+            <button>Click Me 3</button>
+            <button>Click Me 4</button>
+            <button>Click Me 5</button>
+            <button>Click Me 6</button>
+            <p>Not clicked</p>
+        </article>
+    </div>
+
+    <script>
+        document.querySelector('article').addEventListener('click' , onClick);
+
+        function onClick (ev) {
+            if(ev.target.tagName == 'BUTTON') {
+                console.log('click' , ev.target.textContent);
+            } else {
+                console.log('Did not click on button!');
+            }
+        }
+    </script>
+</body>
+</html>
