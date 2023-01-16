@@ -38,7 +38,7 @@ class OnlineShop {
 
     sellProduct(product) {
         if(!this.products[product]) {
-            throw new Error(`There is no {product} in the warehouse.`);
+            throw new Error(`There is no ${product} in the warehouse.`);
         }
         this.products[product]--;
 
