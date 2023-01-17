@@ -1,7 +1,7 @@
 function generateReport() {
 
     const checkedBox = Array.from(document.querySelectorAll(`thead tr th input`));
-    const rowQuantity = document.querySelectorAll(`tbody tr td:nth-child(1)`).length;
+    const rowQuantity = document.querySelectorAll(`tbody tr`).length;
 
     const resulsts = [];
 
