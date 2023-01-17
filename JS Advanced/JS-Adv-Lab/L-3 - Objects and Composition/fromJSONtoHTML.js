@@ -1,37 +1,44 @@
-function fromJSONtoHTML (string) {
+function fromJSONtoHTML(arr) {
+
+    let students = JSON.parse(arr);
+    let htmlText = ['<table>'];
+    let objNames = students[0];
+
+    htmlText.push(makeKeyRow(objNames));
     
-    const convertToArray = JSON.parse(string);
+    students.forEach(obj => htmlText.push(makeValueRow(obj)));
+    htmlText.push('</table>');
 
-    const result = ['<table>'];
+    function makeKeyRow(arr) {
+      let keys = [];
+      Object.keys(arr).forEach(key => {
+        keys.push(`<th>${escapeHTML(key)}</th>`);
+      });
 
-    for(let n = 0; n < convertToArray.length; n++){
-        let currentLine = [`   <tr>`];
-        
-        if(n === 0) {
-            for (const key in convertToArray[n]) {
-                currentLine.push(`<th>${key}</th>`);
-                
-            }
-            currentLine.push(`</tr>`)
-            result.push(currentLine.join(``));
-            currentLine = [`   <tr>`];
-        }
-
-        for(const name in convertToArray[n]){
-            currentLine.push(`<td>${convertToArray[n][name]}</td>`)
-        }
-        
-        currentLine.push(`</tr>`)
-        result.push(currentLine.join(``));
+      return ("<tr>" + keys.join('') + "</tr>");
     }
 
-    result.push(`</table>`);
-
-    for (const line of result) {
-        
-        console.log(line)
+    function makeValueRow(obj) {
+      let rows = [];
+      Object.values(obj).forEach(value => {
+        rows.push(`<td>${escapeHTML(value)}</td>`);
+      });
+      return ("<tr>" + rows.join('') + "</tr>");
     }
-}
+
+    function escapeHTML(value) {
+      return value
+        .toString()
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+    }
+    
+    return htmlText.join('\r\n');
+  }
+  
 
 fromJSONtoHTML(`[{"Name":"Pesho",
 "Score":4,
@@ -42,16 +49,3 @@ fromJSONtoHTML(`[{"Name":"Pesho",
 {"Name":"Angel",
 "Score":5.50,
 " Grade":10}]`)
-
-// <table>
-//    <tr><th>Name</th><th>Score</th></tr>
-//    <tr><td>Stamat</td><td>5.5</td></tr>
-//    <tr><td>Rumen</td><td>6</td></tr>
-// </table>
-
-{/* <table>
-   <tr><th>Name</th><th>Score</th><th>Grade</th></tr>
-   <tr><td>Pesho</td><td>4</td><td>8</td></tr>
-   <tr><td>Gosho</td><td>5</td><td>8</td></tr>
-   <tr><td>Angel</td><td>5.5</td><td>10</td></tr>
-</table> */}
