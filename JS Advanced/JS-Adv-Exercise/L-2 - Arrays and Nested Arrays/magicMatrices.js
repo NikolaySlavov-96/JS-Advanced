@@ -1,37 +1,25 @@
 function magicMatrices(matrix){
 
-    let matrixRowLength = matrix.length;
-    let matrixColumLength = matrix[0].length;
-    let isMagicMatrix = false;
+    const matrixRowLength = (matrix.length - 1);
     
-    matrixRowLength--;
-    matrixColumLength--;
-
     for(let n = 0; n < matrixRowLength; n++){
 
-        let isCurrent = true;
+        let firstRow = matrix[n].reduce((a, b) => a + b, 0);
+        let secondRow = matrix[n + 1].reduce((a, b) => a + b, 0);
+        let firstCol = 0;
+        let secondCol = 0;
 
-        for(let z = 0; z < matrixColumLength; z++){
-
-            let sumFirstLine = matrix[n][z] + matrix[n][z + 1];
-            let sumSeconLine = matrix[n + 1][z] + matrix[n + 1][z + 1];
-
-            if(sumFirstLine !== sumSeconLine) {
-                isCurrent = false;
-            }
-
-            let sumFirstColum = matrix[n][z] + matrix[n + 1][z];
-            let sumSecondColum = matrix[n][z + 1] + matrix[n + 1][z + 1];
-
-            if(sumFirstColum !== sumSecondColum) {
-                isCurrent = false;
-            }
+        for(let z = 0; z < (matrixRowLength + 1); z++){
+            firstCol += matrix[n][z];
+            secondCol += matrix[n + 1][z];
         }
 
-        isMagicMatrix = isCurrent;
+        if(firstRow !== secondRow || firstCol !== secondCol) {
+            return false;
+        }
     }
 
-    console.log(isMagicMatrix)
+    return true;
 }
 
 magicMatrices([
