@@ -1,0 +1,23 @@
+{
+  "name": "y",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha chooseYourCar.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikolaySlavov-96/JS-Advanced.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NikolaySlavov-96/JS-Advanced/issues"
+  },
+  "homepage": "https://github.com/NikolaySlavov-96/JS-Advanced#readme",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
