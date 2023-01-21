@@ -20,8 +20,12 @@ function solve() {
         const name = inputData[0].value;
         const hall = inputData[1].value;
         let price = inputData[2].value;
+
+        if(name !== '') {
+            console.log(name)
+        }
         
-        if(name !== '' && hall !== '' && price !== '' && !isNaN(price)) {
+        if(name !== '' && hall !== '' && price !== '' && !isNaN(Number(price))) {
             
             price = Number(price).toFixed(2);
         
