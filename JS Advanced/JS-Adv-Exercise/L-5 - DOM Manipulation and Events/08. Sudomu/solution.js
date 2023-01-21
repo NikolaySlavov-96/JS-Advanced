@@ -4,13 +4,14 @@ function solve() {
     
     quckBtn.addEventListener('click' , onCheck);
     clearBtn.addEventListener('click' , onClear);
+    const borderTable = document.querySelector('table');
+    const textTable = document.querySelector('#check p');
 
     function onCheck (e) {
         
-        const borderTable = document.querySelector('table');
-        const textTable = document.querySelector('#check p');
 
         const checkedNumber = Array.from(document.querySelectorAll('tbody tr'));
+        console.log(checkedNumber)
         const result = createArrayFrom(checkedNumber);
 
         let isCorrect = cheking(result);
@@ -29,8 +30,8 @@ function solve() {
 
     function onClear (e) {
 
-        document.querySelector('table').style.border = '';
-        document.getElementById('check').textContent = '';
+        borderTable.style.border = '';
+        textTable.textContent = '';
         Array.from(document.querySelectorAll('input')).forEach(e => e.value = '');
     }
 
@@ -58,7 +59,7 @@ function solve() {
 
         for (const row of matirial) {
 
-            if(row[0] === row[1] || row[1] === row[2]) {
+            if(row[0] === row[1] || row[1] === row[2] || row[0] === row[2]) {
                 return false;
             }
         }
@@ -67,7 +68,7 @@ function solve() {
 
         for(let n = 0; n < arrayLength; n++) {
 
-            if(matirial[0][n] === matirial[1][n] || matirial[1][n] === matirial[2][n]) {
+            if(matirial[0][n] === matirial[1][n] || matirial[1][n] === matirial[2][n] || matirial[0][n] === matirial[2][n]) {
                 return false;
             }
         }
