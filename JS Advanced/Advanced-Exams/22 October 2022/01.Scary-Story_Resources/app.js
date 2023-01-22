@@ -11,85 +11,77 @@ function solve() {
     const storyTitle = document.getElementById('story-title');
     const genge = document.getElementById('genre');
     const story = document.getElementById('story');
-
+    const bodyEl = document.querySelector('.body')
     const addPreview = document.getElementById('preview-list');
-    addPreview.addEventListener('click', onEvents);
+    const mainEl = document.getElementById('main');
 
-    const store = {};
-
-    const main = document.getElementById('main');
-
-    
-    function onChech() {
+    function onChech(ev) {
+        ev.preventDefault();
 
         if(firstName.value !== '' && lastName.value !== '' && age.value !== '' && storyTitle.value !== '' && story.value !== '') {
             
-            const li = create('li', 'story-info');
+            const li = create('li', 'class', 'story-info');
             const article = create('article');
-            article.appendChild(create('h4', '', `Name: ${firstName.value} ${lastName.value}`));
-            article.appendChild(create('p', '', `Age: ${age.value}`));
-            article.appendChild(create('p', '', `Title: ${storyTitle.value}`));
-            article.appendChild(create('p', '', `Genge: ${genge.value}`));
-            article.appendChild(create('p', '', story.value));
-            article.appendChild(create('button', 'save-btn', 'Save Story'));
-            article.appendChild(create('button', 'edit-btn', 'Edit Story'));
-            article.appendChild(create('button', 'delete-btn', 'Delete Story'));
+            article.appendChild(create('h4', '', '', `Name: ${firstName.value} ${lastName.value}`));
+            article.appendChild(create('p', '', '', `Age: ${age.value}`));
+            article.appendChild(create('p', '', '', `Title: ${storyTitle.value}`));
+            article.appendChild(create('p', '', '', `Genge: ${genge.value}`));
+            article.appendChild(create('p', '', '', story.value));
+            const btnSave = create('button', 'class', 'save-btn', 'Save Story');
+            const btnEdit = create('button', 'class', 'edit-btn', 'Edit Story');
+            const btnDelete = create('button', 'class', 'delete-btn', 'Delete Story');
+            article.appendChild(btnSave);
+            article.appendChild(btnEdit);
+            article.appendChild(btnDelete);
             li.appendChild(article);
 
             addPreview.appendChild(li);
             buttonPublish.disabled = true;
 
-            store[firstName] = firstName.value;
-            store[lastName] = lastName.value;
-            store[age] = age.value;
-            store[storyTitle] = storyTitle.value;
-            store[genge] = genge.value;
-            store[story] = story.value;
+            let storeFirstName = firstName.value;
+            let storeLastName = lastName.value;
+            let storeAge = age.value;
+            let storeStoryTitle = storyTitle.value;
+            let storeGenge = genge.value;
+            let storeStory = story.value;
 
             firstName.value = '';
             lastName.value = '';
             age.value = '';
             storyTitle.value = '';
-            genge.value = '';
             story.value = '';
+
+            btnSave.addEventListener('click', (ev) => {
+                mainEl.remove()
+                const div = create('div', 'id', 'main');
+                div.appendChild(create('h1', '', '', 'Your scary story is saved!'))
+                bodyEl.appendChild(div);
+            });
+
+            btnEdit.addEventListener('click', (ev) => {
+                firstName.value = storeFirstName;
+                lastName.value = storeLastName;
+                age.value = storeAge;
+                storyTitle.value = storeStoryTitle;
+                genge.value = storeGenge;
+                story.value = storeStory;
+                ev.target.parentElement.parentElement.remove()
+                buttonPublish.disabled = false;
+            });
+
+            btnDelete.addEventListener('click', (ev) => {
+                ev.target.parentElement.parentElement.remove()
+                buttonPublish.disabled = false;
+            });
         }
     }
 
-    function onEvents(ev) {
-
-        const funcEdit = {
-            'Save Story': () => {
-                main.innerHTML = '';
-                main.appendChild(create('h1', '', 'Your scary story is saved!'))
-            },
-            'Edit Story': (ev) => {
-                firstName.value = store[firstName];
-                lastName.value = store[lastName];
-                age.value = store[age];
-                storyTitle.value = store[storyTitle];
-                genge.value = store[genge];
-                story.value = store[story];
-                ev.target.parentElement.parentElement.remove()
-                buttonPublish.disabled = false;
-            },
-            'Delete Story': (ev) => {
-                ev.target.parentElement.parentElement.remove()
-                buttonPublish.disabled = false;
-            },
-        }
-
-
-        if(ev.target.tagName === 'BUTTON') {
-            funcEdit[ev.target.textContent](ev)
-        }
-    }
-
-    function create(tag, classIn, text) {
+    function create(tag, atribut, atributeContent, text) {
 
         const el = document.createElement(tag);
 
-        if(classIn !== '' && classIn !== undefined) {
-            el.className = classIn;
+        if(atribut !== '' && atribut !== undefined) {
+            el.setAttribute(atribut, atributeContent);
         }
 
         if(text !== '' && text !== undefined) {
