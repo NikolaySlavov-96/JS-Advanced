@@ -74,7 +74,7 @@ class Garden {
         } else {
             let storsResult = [];
             this.storage.map(el => storsResult.push(`${el.plantName} (${Number(el.quantity)})`));
-            result.push(`Plants in storage: ${storsResult.join(`,`)}`)
+            result.push(`Plants in storage: ${storsResult.join(`, `)}`)
         }
 
         return result.join(`\n`)
