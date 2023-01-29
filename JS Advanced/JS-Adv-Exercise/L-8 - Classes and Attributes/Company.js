@@ -8,8 +8,12 @@ class Company {
 
         salary = Number(salary);
 
-        if([...arguments].some(a => a === null || a === undefined || a === '') || salary < 0){
+        if(name === '' || salary === '' || position === '' || department === '' || name === undefined || salary ===  undefined || position === undefined|| department === undefined || name === null || salary === null || position === null || department === null) {
             throw new Error('Invalid input!');
+        }
+
+        if(salary < 0) {
+            throw new Error('Invalid input!')
         }
 
         if(!this.departments.hasOwnProperty(department)) {
@@ -23,31 +27,34 @@ class Company {
 
     bestDepartment() {
 
-        let result = '';
+        let result = [];
         const bestSalaryPrice = {};
 
         for (const line in this.departments) {
+
             for (const counter of this.departments[line]) {
                 if(!bestSalaryPrice.hasOwnProperty(line)){
-                    bestSalaryPrice[line] = {salary: 0, people: 0};
+                    bestSalaryPrice[line] = {salary: 0, people: 0, price: 0};
                 }
-                bestSalaryPrice[line].salary += counter.salary;
+                bestSalaryPrice[line].salary += Number(counter.salary);
                 bestSalaryPrice[line].people++;
             }
-            bestSalaryPrice[line] = (bestSalaryPrice[line].salary / bestSalaryPrice[line].people).toFixed(2);
+            bestSalaryPrice[line].price = (bestSalaryPrice[line].salary / bestSalaryPrice[line].people).toFixed(2);
         }
 
-        const sortSalary = Object.entries(bestSalaryPrice).sort((a, b) => a - b);
-        result += `Best Department is: ${sortSalary[0][0]}\nAverage salary: ${sortSalary[0][1]}\n`;
+        const sortSalary = Object.entries(bestSalaryPrice).sort((a, b) => b[1].price - a[1].price);
+
+        result.push(`Best Department is: ${sortSalary[0][0]}`);
+        result.push(`Average salary: ${sortSalary[0][1].price}`);
 
         const finalPrint = this.departments[sortSalary[0][0]];
 
-        const sortPrintResult = Object.entries(finalPrint).sort((a, b) => b[1].salary - a[1].salary || a[1].name.localeCompare(b[1].name));
+        const sortPrintResult = finalPrint.sort((a, b) => b.salary - a.salary || a.name.localeCompare(b.name));
 
-        for (const workers of sortPrintResult) {
-            result += `${workers[1].name} ${workers[1].salary} ${workers[1].position}\n`;
+        for (const workers of finalPrint) {
+            result.push(`${workers.name} ${workers.salary} ${workers.position}`);
         }
-        return result;
+        return result.join(`\n`);
     }
 }
 
