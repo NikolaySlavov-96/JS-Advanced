@@ -21,7 +21,7 @@ function solve() {
     }
 
     const row = document.createElement('tr');
-    row.setAttribute('class', 'row');
+    row.classList.add('row');
 
     const tdMake = document.createElement('td');
     tdMake.textContent = makeIn.value;
@@ -34,14 +34,16 @@ function solve() {
     const tdPriceOrigin = document.createElement('td');
     tdPriceOrigin.textContent = priceOriIn.value;
     const tdSellPrice = document.createElement('td');
-    tdSellPrice.textContent = yearIn.value;
+    tdSellPrice.textContent = priceSellIn.value;
     const tdButton = document.createElement('td');
     const btnEdit = document.createElement('button');
-    btnEdit.setAttribute('class', 'action-btn edit');
+    btnEdit.classList.add('action-btn');
+    btnEdit.classList.add('edit');
     btnEdit.textContent = 'Edit';
     tdButton.appendChild(btnEdit);
     const btnSell = document.createElement('button');
-    btnSell.setAttribute('class', 'action-btn sell')
+    btnSell.classList.add('action-btn');
+    btnSell.classList.add(`sell`)
     btnSell.textContent = 'Sell';
     tdButton.appendChild(btnSell);
 
@@ -65,8 +67,13 @@ function solve() {
     let priceSellStore = priceSellIn.value;
     let fuelStore = inputSelect.value;
 
+    makeIn.value = '';
+    modelIn.value = '';
+    yearIn.value = '';
+    priceOriIn.value = '';
+    priceSellIn.value = '';
     inputSelect.value = '';
-    input.forEach(l => l.value = '');
+
 
     function onEdin() {
       makeIn.value = makeStore;
@@ -80,9 +87,8 @@ function solve() {
     }
 
     function onSell() {
-      console.log
       const li = document.createElement('li');
-      li.setAttribute('class', 'each-list');
+      li.classList.add('each-list');
       
       let differencePrice = Number(priceSellStore) - Number(priceOriStore);
 
