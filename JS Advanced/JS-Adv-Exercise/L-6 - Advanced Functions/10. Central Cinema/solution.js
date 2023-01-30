@@ -42,7 +42,9 @@ function solve() {
 
             cinema[name] = price;
             
-            inputData.forEach(e => e.value = '');
+            inputData[0].value = '';
+            inputData[1].value = '';
+            inputData[2].value = '';
         }
     }
     
