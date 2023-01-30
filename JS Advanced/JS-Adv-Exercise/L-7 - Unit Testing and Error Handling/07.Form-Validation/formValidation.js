@@ -36,7 +36,6 @@ function validate() {
         }
 
         function display(current, boolean) {
-            console.log(boolean)
             if(boolean) {
                 current.style.borderColor = '';
             } else if(!boolean) {
