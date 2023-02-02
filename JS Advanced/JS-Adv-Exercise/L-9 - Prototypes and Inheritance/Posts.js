@@ -5,7 +5,7 @@ function solution() {
             this.content = content;
         }
         toString() {
-            return `Post: ${this.title} \nContent: ${this.content}`
+            return `Post: ${this.title}\nContent: ${this.content}`
         }
     }
 
@@ -16,20 +16,36 @@ function solution() {
             this.dislikes = dislikes;
             this.comments = [];
         }
-        addComment(str) {
-            this.comments.push(str);
+        addComment(comments) {
+            this.comments.push(comments);
         }
         toString() {
-            if(this.comments.length === 0) {
-                return `Post: ${this.title} \nContent: ${this.content}\nRating: ${this.likes - this.dislikes}`
+            if(this.comments.length == 0) {
+                return `${super.toString()}\nRating: ${this.likes - this.dislikes}`
             }
-            return `Post: ${this.title} \nContent: ${this.content}\nRating: ${this.likes - this.dislikes}\nComments:\n * ${this.comments.join(`\n * `)}`
+            return `${super.toString()}\nRating: ${this.likes - this.dislikes}\nComments:\n * ${this.comments.join(`\n * `)}`
+        }
+    }
+
+    class BlogPost extends Post {
+        constructor(title, content, views) {
+            super(title, content);
+            this.views = views;
+        }
+        view() {
+            this.views++;
+            return this;
+        }
+
+        toString() {
+            return `Post: ${this.title}\nContent: ${this.content}\nViews: ${this.views}`;
         }
     }
 
     return {
         Post,
-        SocialMediaPost
+        SocialMediaPost,
+        BlogPost,
     }
 }
 
@@ -51,3 +67,12 @@ console.log(scm.toString());
 // //  * Good post
 // //  * Very good post
 // //  * Wow!
+
+let tes = new classes.BlogPost("NewNear", "Seagate", 25, 30);
+
+tes.view()
+tes.view()
+tes.view()
+
+
+console.log(tes.toString())
