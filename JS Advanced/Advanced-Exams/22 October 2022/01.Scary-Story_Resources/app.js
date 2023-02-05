@@ -48,14 +48,13 @@ function solve() {
             firstName.value = '';
             lastName.value = '';
             age.value = '';
+            genge.value = '';
             storyTitle.value = '';
             story.value = '';
 
             btnSave.addEventListener('click', (ev) => {
-                mainEl.remove()
-                const div = create('div', 'id', 'main');
-                div.appendChild(create('h1', '', '', 'Your scary story is saved!'))
-                bodyEl.appendChild(div);
+                mainEl.innerHTML = '';
+                mainEl.appendChild(create('h1', '', '', 'Your scary story is saved!'))
             });
 
             btnEdit.addEventListener('click', (ev) => {
@@ -80,8 +79,8 @@ function solve() {
 
         const el = document.createElement(tag);
 
-        if(atribut !== '' && atribut !== undefined) {
-            el.setAttribute(atribut, atributeContent);
+        if(atributeContent !== '' && atributeContent !== undefined) {
+            el.classList.add(atributeContent);
         }
 
         if(text !== '' && text !== undefined) {
