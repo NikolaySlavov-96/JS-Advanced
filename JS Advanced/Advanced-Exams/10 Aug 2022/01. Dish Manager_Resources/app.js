@@ -33,7 +33,7 @@ function solve() {
 		const pGe = document.createElement('p');
 		pGe.textContent = `${genderSelectIn.value}, ${ageIn.value}`;
 		const pContent = document.createElement('p');
-		pContent.textContent = taskIn.value;
+		pContent.textContent = `Dish description: ${taskIn.value}`;
 		article.appendChild(h4);
 		article.appendChild(pGe);
 		article.appendChild(pContent);
