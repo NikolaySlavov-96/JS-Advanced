@@ -30,10 +30,10 @@ function solve() {
             const btnSave = create('button', 'class', 'save-btn', 'Save Story');
             const btnEdit = create('button', 'class', 'edit-btn', 'Edit Story');
             const btnDelete = create('button', 'class', 'delete-btn', 'Delete Story');
-            article.appendChild(btnSave);
-            article.appendChild(btnEdit);
-            article.appendChild(btnDelete);
             li.appendChild(article);
+            li.appendChild(btnSave);
+            li.appendChild(btnEdit);
+            li.appendChild(btnDelete);
 
             addPreview.appendChild(li);
             buttonPublish.disabled = true;
@@ -64,12 +64,12 @@ function solve() {
                 storyTitle.value = storeStoryTitle;
                 genge.value = storeGenge;
                 story.value = storeStory;
-                ev.target.parentElement.parentElement.remove()
+                li.remove()
                 buttonPublish.disabled = false;
             });
 
             btnDelete.addEventListener('click', (ev) => {
-                ev.target.parentElement.parentElement.remove()
+                li.remove()
                 buttonPublish.disabled = false;
             });
         }
