@@ -53,8 +53,11 @@ function solve() {
             story.value = '';
 
             btnSave.addEventListener('click', (ev) => {
-                mainEl.innerHTML = '';
-                mainEl.appendChild(create('h1', '', '', 'Your scary story is saved!'))
+                mainEl.remove()
+                const main = document.createElement('div');
+                main.id = 'main';
+                main.appendChild(create('h1', '', '', 'Your scary story is saved!'));
+                bodyEl.appendChild(main)
             });
 
             btnEdit.addEventListener('click', (ev) => {
