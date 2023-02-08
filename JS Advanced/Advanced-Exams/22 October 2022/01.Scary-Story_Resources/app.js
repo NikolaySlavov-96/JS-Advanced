@@ -25,7 +25,7 @@ function solve() {
             article.appendChild(create('h4', '', '', `Name: ${firstName.value} ${lastName.value}`));
             article.appendChild(create('p', '', '', `Age: ${age.value}`));
             article.appendChild(create('p', '', '', `Title: ${storyTitle.value}`));
-            article.appendChild(create('p', '', '', `Genge: ${genge.value}`));
+            article.appendChild(create('p', '', '', `Genre: ${genge.value}`));
             article.appendChild(create('p', '', '', story.value));
             const btnSave = create('button', 'class', 'save-btn', 'Save Story');
             const btnEdit = create('button', 'class', 'edit-btn', 'Edit Story');
