@@ -8,9 +8,9 @@ async function getInfo() {
         busesArrive.innerHTML = '';
         const data = await fetch(`http://localhost:3030/jsonstore/bus/businfo/${stopID}`);
 
-        if(data.status !== 200) {
-            throw new Error('Error')
-        }
+        // if(data.status !== 200) {
+        //     throw new Error('Error')
+        // }
 
         const response = await data.json();
 
@@ -23,6 +23,6 @@ async function getInfo() {
             busesArrive.appendChild(li);
         }
     } catch (err) {
-        stopName.textContent = err.message;
+        stopName.textContent = 'Error';
     }
 }
