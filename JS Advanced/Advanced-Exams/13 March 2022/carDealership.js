@@ -48,7 +48,7 @@ class CarDealership {
     currentCar() {
 
         if(!this.availableCars.length) {
-            throw new Error(`There are no available cars`);
+            return `There are no available cars`;
         }
 
         const result = [];
