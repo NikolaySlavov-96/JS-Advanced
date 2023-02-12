@@ -4,14 +4,21 @@ function attachEvents() {
     document.getElementById(`btnViewPost`).addEventListener('click', onViewPost)
 
     const selecPost = document.getElementById(`posts`);
+    const postTitle = document.getElementById(`post-title`);
+    const postBody = document.getElementById(`post-body`);
+    const commentBody = document.getElementById(`post-comments`);
 
     async function onGetPosts() {
+
+        postTitle.textContent = '';
+        postBody.innerHTML = '';
+        commentBody.innerHTML = '';
 
         try {
             const respons = await fetch('http://localhost:3030/jsonstore/blog/posts');
     
             if(respons.status !== 200) {
-                throw new Error('@')
+                throw new Error('')
             }
 
             const data = await respons.json();
@@ -23,7 +30,7 @@ function attachEvents() {
             }
 
         } catch(err) {
-            console.log(err.message)
+            // console.log(err.message)
         }
 
     }
@@ -31,24 +38,36 @@ function attachEvents() {
     async function onViewPost() {
         const idPost = selecPost.selectedOptions[0].value;
     
-        console.log(idPost);
-        const requestPost = await fetch(`http://localhost:3030/jsonstore/blog/posts/${idPost}`);
-        const requestComment = await fetch(`http://localhost:3030/jsonstore/blog/comments`);
-
-        if(requestPost.status !== 200) {
-            throw new Error(`'`);
+        try {
+            const requestPost = await fetch(`http://localhost:3030/jsonstore/blog/posts/${idPost}`);
+            const requestComment = await fetch(`http://localhost:3030/jsonstore/blog/comments`);
+    
+            // if(requestPost.status !== 200) {
+            //     throw new Error(``);
+            // }
+    
+            // if(requestComment.status !== 200) {
+            //     throw new Error(``);
+            // }
+    
+            const dataPost = await requestPost.json();
+    
+            postTitle.textContent = dataPost.title;
+            postBody.textContent = dataPost.body;
+    
+            const dataComment = await requestComment.json();
+            const postsComment = Object.values(dataComment).filter(com => com.postId === idPost);
+            
+            commentBody.innerHTML = '';
+            for (const post of postsComment) {
+                const li = document.createElement('li');
+                li.id = post.id;
+                li.textContent = post.text;
+                commentBody.appendChild(li);
+            }
+        } catch(err) {
+            // console.log(err.message)
         }
-
-        const dataPost = await requestPost.json();
-
-        const postTitle = document.getElementById(`post-title`);
-        const postBody = document.getElementById(`post-body`);
-
-        postTitle.textContent = dataPost.title;
-        postBody.textContent = dataPost.body;
-
-
-
     }
 
     function createOption(inputValut, contentTitle) {

@@ -1,16 +1,15 @@
-const mainMain = document.getElementById('main');
-
 function lockedProfile() {
     createPerUser()
 }
+const mainMain = document.getElementById('main');
 
 async function createPerUser() {
 
     try {
-        const response = await fetch('http://localhost:3030/jsonstore/advanced/profiles');
+        const response = await fetch(`http://localhost:3030/jsonstore/advanced/profiles`);
 
         if(response.status !== 200) {
-            throw new Error('Invalid');
+            throw new Error('');
         }
 
         const data = await response.json();
@@ -23,7 +22,7 @@ async function createPerUser() {
         }
         
     } catch(err) {
-        console.log(err.message)
+        // console.log(err.message)
     }
 }
 

@@ -1,0 +1,23 @@
+{
+  "name": "js-advanced",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha companyAdministration.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikolaySlavov-96/JS-Advanced.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NikolaySlavov-96/JS-Advanced/issues"
+  },
+  "homepage": "https://github.com/NikolaySlavov-96/JS-Advanced#readme",
+  "description": "",
+  "dependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0"
+  }
+}
