@@ -17,6 +17,7 @@ function attachEvents() {
             const data = await respons.json();
             const dataArr = Object.values(data)
 
+            selecPost.innerHTML = '';
             for (const dataLine of dataArr) {
                 selecPost.appendChild(createOption(dataLine.id, dataLine.title));
             }
@@ -28,6 +29,25 @@ function attachEvents() {
     }
 
     async function onViewPost() {
+        const idPost = selecPost.selectedOptions[0].value;
+    
+        console.log(idPost);
+        const requestPost = await fetch(`http://localhost:3030/jsonstore/blog/posts/${idPost}`);
+        const requestComment = await fetch(`http://localhost:3030/jsonstore/blog/comments`);
+
+        if(requestPost.status !== 200) {
+            throw new Error(`'`);
+        }
+
+        const dataPost = await requestPost.json();
+
+        const postTitle = document.getElementById(`post-title`);
+        const postBody = document.getElementById(`post-body`);
+
+        postTitle.textContent = dataPost.title;
+        postBody.textContent = dataPost.body;
+
+
 
     }
 

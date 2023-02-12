@@ -1,5 +1,4 @@
 function attachEvents() {
-    console.log("TODO...");
 
     const typeWeather = {
         'Sunny': '&#x2600', // ☀
@@ -13,7 +12,7 @@ function attachEvents() {
     const inputLocation = document.getElementById(`location`);
 
     const forecastDiv = document.getElementById(`forecast`);
-    const forestFirstDay = document.querySelector(`#current > div`);
+    const forestFirstDay = document.querySelector(`#current .label`);
 
     const currentWeather = document.getElementById(`current`);
     const upComingWeather = document.getElementById('upcoming');
@@ -22,11 +21,15 @@ function attachEvents() {
 
         try {
             const request = await fetch('http://localhost:3030/jsonstore/forecaster/locations');
+
+            // if(request.ok === false) {
+            //     throw new Error(`dont given correct city`)
+            // }
             const data = await request.json();
             const result = data.find(loc => loc.name === inputLocation.value);
 
             if(result === undefined) {
-                throw new Error();// waiting to write
+                throw new Error();
             }
             const requestWetherOne = await fetch(`http://localhost:3030/jsonstore/forecaster/today/${result.code}`);
             const dataOneDay = await requestWetherOne.json();
@@ -37,19 +40,19 @@ function attachEvents() {
             forecastDiv.style.display = 'block';
             
             
-            const divOne = createHTMLElement('div', 'foreasts');
+            const divOne = createHTMLElement('div', 'forecasts');
             const firsSpanOne = createHTMLElement('span', 'condition');
             firsSpanOne.classList.add('symbol');
             firsSpanOne.innerHTML = `${typeWeather[dataOneDay.forecast.condition]}`
             divOne.appendChild(firsSpanOne);
             const spanOneDays = createHTMLElement('span', 'condition');
             spanOneDays.appendChild(createHTMLElement('span', 'forecast-data', dataOneDay.name));
-            spanOneDays.appendChild(createHTMLElement('span', 'forecast-data', `${dataOneDay.forecast.low}°/${dataOneDay.forecast.high}°`));
+            spanOneDays.appendChild(createHTMLElement('span', 'forecast-data', `${dataOneDay.forecast.low}${typeWeather["Degrees"]}/${dataOneDay.forecast.high}${typeWeather["Degrees"]}`));
             spanOneDays.appendChild(createHTMLElement('span', 'forecast-data', dataOneDay.forecast.condition));
             divOne.appendChild(spanOneDays);
             currentWeather.appendChild(divOne);
             
-            const divThree = createHTMLElement('div', 'foreasts-info');
+            const divThree = createHTMLElement('div', 'forecast-info');
             for (const line of dataThreDay.forecast) {
                 divThree.appendChild(createThreeDays(line.condition, line.low, line.high));
             }
@@ -70,7 +73,7 @@ function attachEvents() {
         }
 
         if(content !== '' && content !== undefined) {
-            elem.textContent = content
+            elem.innerHTML = content
         }
 
         return elem;
@@ -81,7 +84,7 @@ function attachEvents() {
         const symbolSpan = createHTMLElement('span', 'symbol');
         symbolSpan.innerHTML = typeWeather[typeWeat];
         firsSpanThree.appendChild(symbolSpan);
-        firsSpanThree.appendChild(createHTMLElement('span', 'forecast-data', `${low}°/${hight}°`));
+        firsSpanThree.appendChild(createHTMLElement('span', 'forecast-data', `${low}${typeWeather["Degrees"]}/${hight}${typeWeather["Degrees"]}`));
         firsSpanThree.appendChild(createHTMLElement('span', 'forecast-data', typeWeat));
         return firsSpanThree;
     }
