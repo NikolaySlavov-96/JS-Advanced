@@ -8,7 +8,7 @@ async function solution() {
         const request = await fetch('http://localhost:3030/jsonstore/advanced/articles/list');
 
         if(request.status !== 200) {
-            throw new Error('*');
+            throw new Error(``);
         }
         
         const data = await request.json();
@@ -18,7 +18,7 @@ async function solution() {
             createHTML(add)
         }
     } catch(err) {
-        console.log(err.message);
+        // console.log(err.message);
     }
 }
 
@@ -76,9 +76,16 @@ function more(ev) {
 
 async function fetchFull(id, result) {
 
-    const response = await fetch(`http://localhost:3030/jsonstore/advanced/articles/details/${id}`);
-
-    const data = await response.json();
-
-    result.appendChild(createElem('p' ,'' ,'' , data.content));
+    try {
+        const response = await fetch(`http://localhost:3030/jsonstore/advanced/articles/details/${id}`);
+        
+        if(response.status !== 200) {
+            throw new Error(``);
+        }
+        const data = await response.json();
+    
+        result.appendChild(createElem('p' ,'' ,'' , data.content));
+    } catch(err) {
+        // console.log(err.message);
+    }
 }
