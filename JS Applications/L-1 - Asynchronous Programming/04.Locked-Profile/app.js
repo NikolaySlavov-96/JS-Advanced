@@ -8,8 +8,9 @@ async function createPerUser() {
     try {
         const response = await fetch(`http://localhost:3030/jsonstore/advanced/profiles`);
 
-        if(response.status !== 200) {
-            throw new Error('');
+        if(response.ok == false) {
+            const error = await response.json();
+            throw new Error(error.message);
         }
 
         const data = await response.json();
@@ -22,7 +23,7 @@ async function createPerUser() {
         }
         
     } catch(err) {
-        // console.log(err.message)
+        alert(err.message);
     }
 }
 
@@ -64,7 +65,7 @@ function typeView(ev) {
         const btn = profile.querySelector('button')
         if(ev.target.textContent === 'Show more') {
             btn.textContent = 'Hide it';
-            view.style.display = '';
+            view.style.display = 'inline-block';
         } else {
             view.style.display = 'none';
             btn.textContent = 'Show more';

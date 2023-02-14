@@ -42,13 +42,15 @@ function attachEvents() {
             const requestPost = await fetch(`http://localhost:3030/jsonstore/blog/posts/${idPost}`);
             const requestComment = await fetch(`http://localhost:3030/jsonstore/blog/comments`);
     
-            // if(requestPost.status !== 200) {
-            //     throw new Error(``);
-            // }
+            if(requestPost.ok == false) {
+                const error = await requestPost.json();
+                throw new Error(error.message);
+            }
     
-            // if(requestComment.status !== 200) {
-            //     throw new Error(``);
-            // }
+            if(requestComment.ok == false) {
+                const error = await requestComment.json();
+                throw new Error(error.message);
+            }
     
             const dataPost = await requestPost.json();
     
@@ -66,6 +68,7 @@ function attachEvents() {
                 commentBody.appendChild(li);
             }
         } catch(err) {
+            alert(err.message);
             // console.log(err.message)
         }
     }
