@@ -1,6 +1,5 @@
 import {contentHomeViewGetPost, contentPostViewTitle, contentPostViewComment, contentPostViewUserCommen} from './createConteiner.js';
 
-
 const addComment = document.querySelector('.topic-title');
 const addPostViewTitle = document.getElementsByClassName('theme-title')[0];
 const addPostViewComment = document.getElementsByClassName(`comment`)[0];
