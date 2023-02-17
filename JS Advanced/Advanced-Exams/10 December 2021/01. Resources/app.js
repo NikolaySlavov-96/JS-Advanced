@@ -27,7 +27,7 @@ function solve() {
         }
 
         const divEl = createHTML('div', '', 'container');
-        divEl.appendChild(createHTML('h2', `Product type for repair: ${typeProductInput.selectedOptions[0].value}`));
+        divEl.appendChild(createHTML('h2', `Product type for repair: ${typeProductInput.value}`));
         divEl.appendChild(createHTML('h3', `Client information: ${clientNameV}, ${clientPhoneV}`));
         divEl.appendChild(createHTML('h4', `Description of the problem: ${descriptionV}`));
         const startBtn = createHTML('button', 'Start repair', 'start-btn');

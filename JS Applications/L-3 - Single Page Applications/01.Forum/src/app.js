@@ -1,11 +1,12 @@
 import { homeViewSection } from './homeView.js';
-import { getRequest } from './requestrs.js';
 
-// window.addEventListener('load', homeViewRequestData)
+window.addEventListener('load', homeViewSection)
 document.querySelector('nav a').addEventListener('click', homeViewSection);
 
+// const viewPage = {
+    
+// }
 
-function homeViewRequestData(ev) {
-    const urlPost = '/jsonstore/collections/myboard/posts';
-    getRequest(urlPost);
-}
+// function views() {
+
+// }
