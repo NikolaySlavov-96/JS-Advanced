@@ -29,8 +29,8 @@ function solve() {
     articleInfo.appendChild(createEl('p', '', `From date: ${dataFrom}`))
     articleInfo.appendChild(createEl('p', '', `For ${numberDays} days`))
     articleInfo.appendChild(createEl('p', '', `For ${numberPeople} people`));
-    articleInfo.appendChild(createEl('button', 'edit-btn', 'Edit'))
-    articleInfo.appendChild(createEl('button', 'continue-btn', 'Continue'));
+    list.appendChild(createEl('button', 'edit-btn', 'Edit'))
+    list.appendChild(createEl('button', 'continue-btn', 'Continue'));
     list.appendChild(articleInfo);
 
     list.querySelector('.edit-btn').addEventListener('click', onEdit);
@@ -59,8 +59,8 @@ function solve() {
     function onContinue() {
         list.querySelector('.edit-btn').remove();
         list.querySelector('.continue-btn').remove();
-        list.classList.remove('ticket');
-        list.classList.add('ticket-content');
+        // list.classList.remove('ticket');
+        // list.classList.add('ticket-content');
         list.appendChild(createEl('button', 'confirm-btn', 'Confirm'))
         list.appendChild(createEl('button', 'cancel-btn', 'Cancel'))
         confurmTicket.appendChild(list);
@@ -70,25 +70,20 @@ function solve() {
     
 
     function onConfirm() {
-        main.remove()
+        main.innerHTML = ''
         const h1 = createEl('h1', '', 'Thank you, have a nice day!');
         h1.id = 'thank-you';
         const back = createEl('button', '', 'Back');
-        back.href = '/'
         back.id = 'back-btn';
-        body.appendChild(h1);
-        body.appendChild(back);
+        main.appendChild(h1);
+        main.appendChild(back);
 
-        // back.addEventListener('click', onReload);
+        back.addEventListener('click', () => {window.location.reload()});
     }
 
     function onCancel() {
         list.remove();
         btnSubmit.disabled = false;
-    }
-
-    function onReload() {
-        window.location.reload()
     }
    }
 
