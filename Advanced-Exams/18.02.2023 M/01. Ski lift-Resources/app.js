@@ -23,17 +23,15 @@ function solve() {
         return;
     }
 
-    const list = createEl('div', 'ticket');
+    const list = createEl('li', 'ticket');
     const articleInfo = createEl('article');
     articleInfo.appendChild(createEl('h3', '', `Name: ${firstName} ${lastName}`));
     articleInfo.appendChild(createEl('p', '', `From date: ${dataFrom}`))
     articleInfo.appendChild(createEl('p', '', `For ${numberDays} days`))
     articleInfo.appendChild(createEl('p', '', `For ${numberPeople} people`));
+    articleInfo.appendChild(createEl('button', 'edit-btn', 'Edit'))
+    articleInfo.appendChild(createEl('button', 'continue-btn', 'Continue'));
     list.appendChild(articleInfo);
-    const articleBtn = createEl('article');
-    articleBtn.appendChild(createEl('button', 'edit-btn', 'Edit'))
-    articleBtn.appendChild(createEl('button', 'continue-btn', 'Continue'));
-    list.appendChild(articleBtn);
 
     list.querySelector('.edit-btn').addEventListener('click', onEdit);
     list.querySelector('.continue-btn').addEventListener('click', onContinue);
@@ -59,7 +57,10 @@ function solve() {
     }
 
     function onContinue() {
-        articleBtn.remove();
+        list.querySelector('.edit-btn').remove();
+        list.querySelector('.continue-btn').remove();
+        list.classList.remove('ticket');
+        list.classList.add('ticket-content');
         list.appendChild(createEl('button', 'confirm-btn', 'Confirm'))
         list.appendChild(createEl('button', 'cancel-btn', 'Cancel'))
         confurmTicket.appendChild(list);
@@ -73,11 +74,12 @@ function solve() {
         const h1 = createEl('h1', '', 'Thank you, have a nice day!');
         h1.id = 'thank-you';
         const back = createEl('button', '', 'Back');
+        back.href = '/'
         back.id = 'back-btn';
         body.appendChild(h1);
         body.appendChild(back);
 
-        back.addEventListener('click', onReload);
+        // back.addEventListener('click', onReload);
     }
 
     function onCancel() {

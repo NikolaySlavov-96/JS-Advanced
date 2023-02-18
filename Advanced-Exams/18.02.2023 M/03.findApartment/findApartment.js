@@ -41,5 +41,5 @@ const findNewApartment = {
 };
 
 
-module.exports = findNewApartment;
+module.exports = {findNewApartment} ;
 
